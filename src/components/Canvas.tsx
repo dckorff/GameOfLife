@@ -1,5 +1,12 @@
 import * as React from "react";
 
+// This doesn't work:
+//import BABYLON from 'babylonjs';
+
+// This makes the typedefs work, but we still need to manually include/load the babylon.js file
+import 'babylonjs';
+
+
 export interface CanvasProps { }
 
 export default class Canvas extends React.Component<CanvasProps, undefined> {
@@ -17,9 +24,6 @@ export default class Canvas extends React.Component<CanvasProps, undefined> {
 	    	}	
 	    	grid.push(row);
 	    }
-
-	    console.log(grid);
-
 
 	    // This begins the creation of a function that we will 'call' just after it's built
 	    var createScene = function (engine) {
