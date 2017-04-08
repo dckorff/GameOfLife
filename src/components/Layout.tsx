@@ -1,11 +1,24 @@
 import * as React from 'react';
 import * as ReactDOM from "react-dom";
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
 
-import Canvas from "./Canvas";
+import WorldContainer from "./WorldContainer";
+
+let thing = combineReducers({
+	function(state = {}){return state;}
+});
+console.log('thing')
+console.log(thing)
+
+let store = createStore(thing);
 
 ReactDOM.render(
-	<div>
-		<Canvas />
-	</div>,
+  <Provider store={store}>
+
+
+		<WorldContainer />
+
+	</Provider>,
   document.getElementById("app")
 );
