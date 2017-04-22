@@ -22,7 +22,7 @@ export default class WorldContainer extends React.Component<WorldContainerProps,
 
 		this.setState({grid: this.state.myWorld.grid});
 
-		this.state.myWorld.getNextState();
+		// this.state.myWorld.getNextState();
 
 		// let me = this;
 		// setInterval( 
@@ -49,6 +49,9 @@ export default class WorldContainer extends React.Component<WorldContainerProps,
 		this.state.myWorld.stop();
 	}
 
+	onClickBack(){}
+	onClickForward(){}
+
 	render(){
 	
 		return (
@@ -60,7 +63,7 @@ export default class WorldContainer extends React.Component<WorldContainerProps,
 					<div style={{display:'inline-block', padding: '20px'}}>
 
 						<div className="action-buttons-container">
-							<i className="fa fa-step-backward"></i>
+							<i className="fa fa-step-backward" onClick={this.onClickBack.bind(this)}></i>
 							
 							{/*
 								(this.state.myWorld.isPlaying()) 
@@ -69,7 +72,7 @@ export default class WorldContainer extends React.Component<WorldContainerProps,
 							*/}
 							<i className="fa fa-pause" onClick={this.onClickPause.bind(this)}></i>
 							<i className="fa fa-play" onClick={this.onClickPlay.bind(this)}></i>
-							<i className="fa fa-step-forward"></i>
+							<i className="fa fa-step-forward" onClick={this.onClickForward.bind(this)}></i>
 						</div>
 
 						<GridForm world={this.state.myWorld} setWorldProperties={this.onSetWorldProperties.bind(this)} />

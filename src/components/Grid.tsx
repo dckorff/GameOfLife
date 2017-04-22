@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-
-
 export interface GridProps { }
 
 export default class Grid extends React.Component<GridProps, undefined>{
@@ -9,17 +7,18 @@ export default class Grid extends React.Component<GridProps, undefined>{
 	constructor(props) {
 		super(props);
 
-		
+		this.state = {grid: []};
 	}
 
 	componentDidMount() {
 
 		this.props.world.addOnNewGrid(this.onNewGrid.bind(this));		
-
+		this.setState({grid: this.props.world.grid});
 	}
 
 	onNewGrid(){
-		this.render();
+		this.setState({grid: this.props.world.grid});
+		// this.render();
 	}
 
 	render(){
@@ -34,7 +33,7 @@ export default class Grid extends React.Component<GridProps, undefined>{
 							return ( 
 								<div className="row" key={iRow}>
 									{row.map( (col, iCol) => {
-										return (<div className={"cell" + (col == 1 ? " on" : "")} key={iCol}>{col}</div>)
+										return (<div className={"cell" + (col == 1 ? " on" : "")} key={iCol}></div>)
 									})}
 								</div> 
 							)

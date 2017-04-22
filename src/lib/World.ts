@@ -4,16 +4,16 @@ export default class World {
 
 	size: number;
 	grid: Array<Array<number>>;
-	newGrids: Array<Array<Array<number>>>;
+	oldGrids: Array<Array<Array<number>>>;
 	// onNewGridFunctions: Array<function>;
 
 	constructor(){
 
-		let size: number = 10;
+		let size: number = 100;
 
 		this.grid = this.getGrid(size);
 
-		this.newGrids = [];
+		this.oldGrids = [];
 
 		let initialState = this.getRandomState(size);
 
@@ -78,7 +78,7 @@ export default class World {
 		let min = 0;
 		let max = size - 1;
 		// let numberOfOnes = Math.floor(Math.random() * (max - min)) + min;
-		let numberOfOnes = 50;
+		let numberOfOnes = 500;
 
 
 		// for each, get a random row and col
@@ -88,6 +88,7 @@ export default class World {
 				x: Math.floor(Math.random() * (max - min)) + min,
 				y: Math.floor(Math.random() * (max - min)) + min
 			}
+			console.log(point.x, point.y);
 			onePoints.push(point);
 		}
 
@@ -142,7 +143,7 @@ export default class World {
 				if( (cell == 1) && (livingNeighbors < 2) ){ newGrid[iRow][iCol] = 0; return; }
 
 				// Any live cell with two or three live neighbours lives on to the next generation.
-				if( (cell == 1) && ((livingNeighbors == 2) || (livingNeighbors == 3)) ){ newGrid[iRow][iCol] = 0; return; }
+				if( (cell == 1) && ((livingNeighbors == 2) || (livingNeighbors == 3)) ){ newGrid[iRow][iCol] = 1; return; }
 
 				// Any live cell with more than three live neighbours dies, as if by overpopulation.
 				if( (cell == 1) && (livingNeighbors > 3) ){ newGrid[iRow][iCol] = 0; return; }
@@ -155,15 +156,6 @@ export default class World {
 		});
 
 		this.grid = newGrid;
-
-
-		// console.log("after grid:")
-		// console.log(newGrid);
-		
-		// this.newGrids.push(newGrid);
-
-
-		// this.grid = nextGrid;
 
 		this.onNewGrid();
 
