@@ -6,7 +6,6 @@ export default class Grid extends React.Component<GridProps, undefined>{
 
 	constructor(props) {
 		super(props);
-
 		this.state = {grid: []};
 	}
 
@@ -37,48 +36,8 @@ export default class Grid extends React.Component<GridProps, undefined>{
 									})}
 								</div> 
 							)
-						})}
-					
-				</div>
-			{/*
-				<br /><br /><br />
-
-				<table>
-					<tbody>
-						{this.state.grid.map( (row, iRow) => { 
-							return ( 
-								<tr key={iRow}>
-									{row.map( (col, iCol) => {
-										return (<td key={iCol}>{col}</td>)
-									})}
-								</tr> 
-							)
-						})}
-					</tbody>
-				</table>
-
-				<br />
-
-				{this.state.myWorld.newGrids.length}
-				<br />
-				{this.state.myWorld.newGrids.map( (newGrid, newGridIndex) => {
-					return (
-						<table key={newGridIndex} >						
-							<tbody>
-								{newGrid.map( (row, iRow) => { 
-									return ( 
-										<tr key={iRow}>
-											{row.map( (col, iCol) => {
-												return (<td key={iCol}>{col}</td>)
-											})}
-										</tr> 
-									)
-								})}
-							</tbody>
-						</table>
-					)
-				})}
-				*/}
+						})}					
+				</div>			
 			</div>
 		)
 	}

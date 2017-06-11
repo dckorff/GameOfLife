@@ -6,7 +6,7 @@ const { CheckerPlugin } = require('awesome-typescript-loader')
 
 module.exports = {
 
-    entry: "./src/components/layout.tsx",
+    entry: "./src/app.tsx",
     output: {
         filename: "bundle.js",
         path: __dirname + "/public"

@@ -8,10 +8,6 @@ export default class GridForm extends React.Component<GridFormProps, undefined>{
 		super(props);
 	}
 
-	componentDidMount() {
-
-	}
-
 	onChangeGridSize(event){
 		console.log(event);
 	}
@@ -25,6 +21,10 @@ export default class GridForm extends React.Component<GridFormProps, undefined>{
 
 				<label>Grid Size</label>
 				<input type="text" onChange={this.onChangeGridSize.bind(this)} />
+
+				{/*
+					speed (frames/second)					
+				*/}
 
 			</div>
 		)
