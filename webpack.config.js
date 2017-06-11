@@ -9,7 +9,7 @@ module.exports = {
     entry: "./src/app.tsx",
     output: {
         filename: "bundle.js",
-        path: __dirname + "/public"
+        path: __dirname + "/build"
     },
 
     resolve: {
