@@ -1,11 +1,11 @@
-import Rules from './Rules';
 
 export default class World {
 
 	size: number;
 	grid: Array<Array<number>>;
 	oldGrids: Array<Array<Array<number>>>;
-	// onNewGridFunctions: Array<function>;
+	onNewGridFunctions: Array<Function>;
+	_playIntervalId: number;
 
 	constructor(){
 
@@ -20,8 +20,6 @@ export default class World {
 		this.applyState(this.grid, initialState);
 
 		this.onNewGridFunctions = [];
-
-		//this.grid[1][1] = 1;
 
 	}
 
@@ -60,14 +58,11 @@ export default class World {
 				if(iy < 0){ continue; }
 				if(iy >= grid.length) { continue; }
 				if(!(ix == x && iy == y)){
-					//points.push([ix,iy]);	
 					points.push( {x: ix, y: iy} );
 				}				
 			}
 		}
 
-		// console.log(x, y, points);
-		
 		return points;		
 
 	}
@@ -108,10 +103,6 @@ export default class World {
 
 		let me = this;
 
-		//let nextGrid = 
-		// console.log("before grid:")
-		// console.log(this.grid);
-
 		let newGrid = [];
 
 		this.grid.forEach( (row, iRow) => {
@@ -121,21 +112,10 @@ export default class World {
 			row.forEach( (cell, iCol) => {
 				
 				let neighbors = me.getNeighbors(me.grid, iRow, iCol);
-				
-				// console.log('neighbors');
-				// console.log(neighbors);
 
-				//let livingNeighbors = neighbors.filter( neighbor => ( neighbor == 1 ) ).length;
 				let livingNeighbors = neighbors.filter( neighbor => {
-					// console.log('me.grid[neighbor.x][neighbor.y]');
-					// console.log("value=" + me.grid[neighbor.x][neighbor.y]);
 					return me.grid[neighbor.x][neighbor.y] == 1 
 				}).length;
-
-				// if(livingNeighbors > 0){					
-				// 	console.log('livingNeighbors')
-				// 	console.log(livingNeighbors)
-				// }
 
 				newGrid[iRow].push(me.grid[iRow][iCol]);
 
@@ -166,10 +146,6 @@ export default class World {
 	}
 
 	onNewGrid(){
-		
-		console.log("onNewGrid");
-		console.log(this.onNewGridFunctions);
-
 		let me = this;
 		this.onNewGridFunctions.forEach( func => func(me) );
 	}
@@ -183,14 +159,10 @@ export default class World {
 
 	stop(){		
 		clearInterval(this._playIntervalId);
-		this._playIntervalId = false;
-
+		this._playIntervalId = 0;
 	}
 
 	isPlaying(){
-		// console.log('isPlaying')
-		// console.log(this._playIntervalId)
-		// console.log(!this._playIntervalId)
 		return !!this._playIntervalId;
 	}
 

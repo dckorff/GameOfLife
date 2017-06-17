@@ -1,29 +1,33 @@
 import * as React from 'react';
+import World from '../lib/World';
 
-export interface GridProps { }
+interface IGridProps { 
+	world: World;
+}
 
-export default class Grid extends React.Component<GridProps, undefined>{
+interface IGridState {
+	grid: number[][];
+}
+
+export default class Grid extends React.Component<IGridProps, IGridState>{
 
 	constructor(props) {
 		super(props);
-		this.state = {grid: []};
+		this.state = {
+			grid: []
+		};
 	}
 
 	componentDidMount() {
-
 		this.props.world.addOnNewGrid(this.onNewGrid.bind(this));		
 		this.setState({grid: this.props.world.grid});
 	}
 
 	onNewGrid(){
 		this.setState({grid: this.props.world.grid});
-		// this.render();
 	}
 
 	render(){
-		console.log("render");	
-		console.log("grid props")
-		console.log(this.props);
 		return (
 			<div style={{display: 'inline-block', width: 'calc(100vw - 250px)'}}>
 
