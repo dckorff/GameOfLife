@@ -7,28 +7,32 @@ export default class World {
 	onNewGridFunctions: Array<Function>;
 	_playIntervalId: number;
 
+    private GRID_SIZE = 100;
+
 	constructor(){
 
-		let size: number = 100;
+		this.initializeGrid();
+        this.onNewGridFunctions = [];
 
-		this.grid = this.getGrid(size);
+    }
+
+    private initializeGrid(){
+        this.grid = this.buildNewGrid(this.GRID_SIZE);
 
 		this.oldGrids = [];
 
-		let initialState = this.getRandomState(size);
+		let initialState = this.getRandomState(this.GRID_SIZE);
 
 		this.applyState(this.grid, initialState);
 
-		this.onNewGridFunctions = [];
+    }
 
-	}
-
-	getGrid(size): Array<Array<number>>{
+	private buildNewGrid(size): Array<Array<number>>{
 
 		let grid = [];
 
 		for(let iRow = 0; iRow < size; iRow++){
-			
+
 			let cols = [];
 
 			for(let iCol = 0; iCol < size; iCol++){
@@ -36,14 +40,14 @@ export default class World {
 			}
 
 			grid.push(cols);
-			
+
 		}
 
 		return grid;
 
 	}
 
-	getNeighbors(grid, x, y){
+	private getNeighbors(grid, x, y){
 
 		let startX = x-1;
 		let endX = x+1;
@@ -59,17 +63,17 @@ export default class World {
 				if(iy >= grid.length) { continue; }
 				if(!(ix == x && iy == y)){
 					points.push( {x: ix, y: iy} );
-				}				
+				}
 			}
 		}
 
-		return points;		
+		return points;
 
 	}
 
-	getRandomState(size){
-		
-		// random number of 1's (how many ones)		
+	private getRandomState(size){
+
+		// random number of 1's (how many ones)
 		let min = 0;
 		let max = size - 1;
 		// let numberOfOnes = Math.floor(Math.random() * (max - min)) + min;
@@ -83,7 +87,6 @@ export default class World {
 				x: Math.floor(Math.random() * (max - min)) + min,
 				y: Math.floor(Math.random() * (max - min)) + min
 			}
-			console.log(point.x, point.y);
 			onePoints.push(point);
 		}
 
@@ -91,15 +94,13 @@ export default class World {
 
 	}
 
-	applyState(grid, onePoints){
+	private applyState(grid, onePoints){
 		onePoints.forEach( point => {
 			grid[point.x][point.y] = 1;
 		});
 	}
 
-	getNextState(){
-
-		console.log("getNextState");
+	private getNextState(){
 
 		let me = this;
 
@@ -110,11 +111,11 @@ export default class World {
 			newGrid.push([]);
 
 			row.forEach( (cell, iCol) => {
-				
+
 				let neighbors = me.getNeighbors(me.grid, iRow, iCol);
 
 				let livingNeighbors = neighbors.filter( neighbor => {
-					return me.grid[neighbor.x][neighbor.y] == 1 
+					return me.grid[neighbor.x][neighbor.y] == 1
 				}).length;
 
 				newGrid[iRow].push(me.grid[iRow][iCol]);
@@ -141,29 +142,33 @@ export default class World {
 
 	}
 
-	addOnNewGrid(func){
+	public addOnNewGrid(func){
 		this.onNewGridFunctions.push(func);
 	}
 
-	onNewGrid(){
+	public onNewGrid(){
 		let me = this;
 		this.onNewGridFunctions.forEach( func => func(me) );
 	}
 
-	play(){
+	public play(){
 		let me = this;
 		this._playIntervalId = setInterval( function(){
 			me.getNextState();
 		}, 1000 )
 	}
 
-	stop(){		
+	public stop(){
 		clearInterval(this._playIntervalId);
 		this._playIntervalId = 0;
 	}
 
-	isPlaying(){
+	public isPlaying(){
 		return !!this._playIntervalId;
-	}
+    }
+
+    public reset(){
+        this.initializeGrid();
+    }
 
 }
