@@ -4,11 +4,11 @@ html {
 
 body {
 	color: deepskyblue;
-	background-color: #012;	
+	background-color: #012;
   	font-family: sans-serif;
 	min-height: 100%;
-	margin:0; 
-	padding:0; 
+	margin:0;
+	padding:0;
 	width: 100%;
 }
 
@@ -37,7 +37,7 @@ body {
 	padding: 6px;
 }
 
-.grid-form-container input {	
+.grid-form-container input {
 	background-color: rgba(0,0,0,0);
 	border: none;
 	border-bottom: 3px solid deepskyblue;
@@ -60,13 +60,25 @@ body {
 
 .world-container .cell {
 	display: inline-block;
-	background-color: #123;	
+	background-color: #123;
 	border: 1px solid #001122;
 	/*cursor: pointer;*/
 	height: 4px;
-	width: 5px;	
+	width: 5px;
 }
 
 .world-container .cell.on {
-	background-color: #05F;	
+	background-color: #05F;
+}
+
+.btn {
+    transition: all 0.25s;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.btn:hover {
+    transition: opacity 0.25s;
+    opacity: .75;
+    transform: scale(1.05);
 }

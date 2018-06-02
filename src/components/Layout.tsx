@@ -1,15 +1,13 @@
 import * as React from 'react';
-import { connect } from 'react-redux'
-
 import World from '../lib/World'
 import Grid from "./Grid";
 
 
-interface ILayoutProps { 
+interface ILayoutProps {
 
 }
 
-interface ILayoutState { 
+interface ILayoutState {
 	myWorld: World;
 	grid: number[][];
 }
@@ -20,9 +18,9 @@ export default class Layout extends React.Component<ILayoutProps, ILayoutState>{
 		super(props);
 
 		let myWorld = new World();
-		
+
 		this.state = {
-			myWorld: myWorld, 
+			myWorld: myWorld,
 			grid: []
 		};
 
@@ -42,11 +40,16 @@ export default class Layout extends React.Component<ILayoutProps, ILayoutState>{
 		this.state.myWorld.stop();
 	}
 
+    onClickReset(){
+        this.state.myWorld.reset();
+        this.forceUpdate();
+	}
+
 	onClickBack(){}
 	onClickForward(){}
 
 	render(){
-	
+
 		return (
 
 			<div>
@@ -57,9 +60,9 @@ export default class Layout extends React.Component<ILayoutProps, ILayoutState>{
 
 						<div className="action-buttons-container">
 							{/*<i className="fa fa-step-backward" onClick={this.onClickBack.bind(this)}></i>*/}
-							<i className="fa fa-pause" onClick={this.onClickPause.bind(this)}></i>
-							<i className="fa fa-play" onClick={this.onClickPlay.bind(this)}></i>
-							{/*<i className="fa fa-step-forward" onClick={this.onClickForward.bind(this)}></i>*/}
+							<i className="fa fa-pause btn" onClick={this.onClickPause.bind(this)}></i>
+							<i className="fa fa-play btn" onClick={this.onClickPlay.bind(this)}></i>
+							<i className="fa fa-refresh btn" onClick={this.onClickReset.bind(this)}></i>
 						</div>
 
 					</div>
