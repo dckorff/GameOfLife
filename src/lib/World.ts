@@ -73,12 +73,9 @@ export default class World {
 
 	private getRandomState(size){
 
-		// random number of 1's (how many ones)
 		let min = 0;
 		let max = size - 1;
-		// let numberOfOnes = Math.floor(Math.random() * (max - min)) + min;
-		let numberOfOnes = 500;
-
+		let numberOfOnes = 2000;
 
 		// for each, get a random row and col
 		let onePoints = [];
@@ -155,7 +152,7 @@ export default class World {
 		let me = this;
 		this._playIntervalId = setInterval( function(){
 			me.getNextState();
-		}, 1000 )
+		}, 50 )
 	}
 
 	public stop(){
