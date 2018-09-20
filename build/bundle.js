@@ -9655,12 +9655,11 @@ var Layout = /** @class */ (function (_super) {
     Layout.prototype.onClickForward = function () { };
     Layout.prototype.render = function () {
         return (React.createElement("div", null,
-            React.createElement("div", { style: { display: 'inline-block', height: '100%', verticalAlign: 'top', backgroundColor: 'rebeccapurple', width: '250px' } },
-                React.createElement("div", { style: { display: 'inline-block', padding: '20px 0', width: '100%' } },
-                    React.createElement("div", { className: "action-buttons-container" },
-                        React.createElement("i", { className: "fa fa-pause btn", onClick: this.onClickPause.bind(this) }),
-                        React.createElement("i", { className: "fa fa-play btn", onClick: this.onClickPlay.bind(this) }),
-                        React.createElement("i", { className: "fa fa-refresh btn", onClick: this.onClickReset.bind(this) })))),
+            React.createElement("div", { className: "menu-container" },
+                React.createElement("div", { className: "action-buttons-container" },
+                    React.createElement("i", { className: "fa fa-pause btn", onClick: this.onClickPause.bind(this) }),
+                    React.createElement("i", { className: "fa fa-play btn", onClick: this.onClickPlay.bind(this) }),
+                    React.createElement("i", { className: "fa fa-refresh btn", onClick: this.onClickReset.bind(this) }))),
             React.createElement(Grid_1.default, { world: this.state.myWorld })));
     };
     return Layout;
@@ -22225,12 +22224,9 @@ var Grid = /** @class */ (function (_super) {
         this.setState({ grid: this.props.world.grid });
     };
     Grid.prototype.render = function () {
-        return (React.createElement("div", { style: { display: 'inline-block', width: 'calc(100vw - 250px)' } },
-            React.createElement("div", { className: "world-container" }, this.props.world.grid.map(function (row, iRow) {
-                return (React.createElement("div", { className: "row", key: iRow }, row.map(function (col, iCol) {
-                    return (React.createElement("div", { className: "cell" + (col == 1 ? " on" : ""), key: iCol }));
-                })));
-            }))));
+        return (React.createElement("div", { className: "world-container" }, this.props.world.grid.map(function (row, iRow) { return (React.createElement("div", { className: "row", key: iRow }, row.map(function (col, iCol) {
+            return (React.createElement("div", { className: "cell" + (col == 1 ? " on" : ""), key: iCol }));
+        }))); })));
     };
     return Grid;
 }(React.Component));
@@ -22295,11 +22291,9 @@ var World = /** @class */ (function () {
         return points;
     };
     World.prototype.getRandomState = function (size) {
-        // random number of 1's (how many ones)
         var min = 0;
         var max = size - 1;
-        // let numberOfOnes = Math.floor(Math.random() * (max - min)) + min;
-        var numberOfOnes = 500;
+        var numberOfOnes = 2000;
         // for each, get a random row and col
         var onePoints = [];
         for (var i = 0; i <= numberOfOnes; i++) {
@@ -22363,7 +22357,7 @@ var World = /** @class */ (function () {
         var me = this;
         this._playIntervalId = setInterval(function () {
             me.getNextState();
-        }, 1000);
+        }, 50);
     };
     World.prototype.stop = function () {
         clearInterval(this._playIntervalId);
